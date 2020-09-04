@@ -4,7 +4,7 @@ let browser;
 let page;
 
 beforeAll(async () => {
-  browser = await qawolf.launch({slowMo: 100,
+  browser = await qawolf.launch({slowMo: 200,
   });
   const context = await browser.newContext();
   await qawolf.register(context);
@@ -16,12 +16,13 @@ afterAll(async () => {
   await browser.close();
 });
 
-test("myTest6", async () => {
+test("Find-Specialist-Popup", async () => {
   await page.goto("https://www.premierortho.com/");
-  await page.click(".crossImage");
-  await qawolf.scroll(page, "html", { x: 0, y: 1427 });
   await page.click(".btn-blue");
-  await page.selectOption(".searchDisable", "Knee");
+  await page.selectOption(".searchDisable", "Foot And Ankle");
+  await page.click(".quantity");
+  await page.fill(".quantity", "73500");
+  await page.selectOption(".searchDisable", "15");
   await page.click("text=SEARCH");
-  await qawolf.scroll(page, "html", { x: 0, y: 0 });
+  await page.click(".close-img");
 });
